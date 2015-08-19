@@ -30,7 +30,8 @@
                     </div>
                 </accordion-heading>
                 <div class="well item-summary" ng-repeat="item in order.cart.items">
-                    <p><b>{{item.qty}} {{item.name}} </b>{{item.cost | currency:"$"}}</p>
+                    <h4>{{ item.restaurant_name }}</h4>
+                    <p><b>{{item.qty}} {{item.name}} </b>{{item.cost | currency:"$"}} </p>
                     <p>{{item.description}}</p>
                 </div>
             </accordion-group>
