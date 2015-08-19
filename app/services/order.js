@@ -3,7 +3,7 @@ app.factory('Order', function(localStorageService, $rootScope) {
     factory = {};
 
     factory.initialize = function () {
-      if (localStorageService.get('orders').length < 1) {
+      if (localStorageService.get('orders') == null) {
         factory.orders = [];
       } else {
           factory.orders = localStorageService.get('orders');
