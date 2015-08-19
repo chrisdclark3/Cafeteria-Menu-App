@@ -62,7 +62,7 @@
                     <timepicker ng-model="selectedTime" ng-change="changeTime()" hour-step="hstep" minute-step="mstep" show-meridian="isMeridian"></timepicker>
                 </div>
                 <div id="date-time-summary">
-                    <pre class="alert alert-info" ng-model="selectedDateTime" ng-change="changeTime()">Pickup time: {{ selectedDateTime | date:'mm/dd/yy hh:mm a' }}</pre>
+                    <pre class="alert alert-info" ng-model="selectedDateTime" ng-change="changeTime()">Pickup time: {{ selectedDateTime | date:'short' }}</pre>
                 </div>
                 <a class="btn-group" id="checkout">
                     <button class="btn btn-lg" ng-click="createOrder()" ng-disabled="isDisabled == true">Checkout

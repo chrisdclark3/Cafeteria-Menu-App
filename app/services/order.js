@@ -14,7 +14,7 @@ app.factory('Order', function(localStorageService, $rootScope) {
     factory.initialize();
 
 
-    factory.formatDate = function(d) {
+    factory.formatDate = function (d) {
         var dateString = d.toDateString() + " at " + d.toLocaleTimeString();
         return dateString;
     };
