@@ -1,0 +1,75 @@
+<div ng-include src="'views/navbar.html'"></div>
+<div ng-controller="CartsCtrl">
+    <div class="container-fluid" id="cart">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <h2>Shopping Cart</h2>
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Restaurant</th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Cost</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <div ng-if="orderCreated">
+                        <pre class="alert alert-success">{{ message }}</pre>
+                    </div>
+                    <tbody>
+                        <tr ng-repeat="item in cart.items">
+                            <td>{{ item.restaurant_name }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.price | currency:"$"}}</td>
+                            <td>
+                                <div class="form-inline">
+                                    <div class="input-group update-item">
+                                        <input type="text" class="form-control" ng-model="item.qty">
+                                        <span class="input-group-btn"><button class="btn btn-default" ng-click="updateItem(item)">Update</button></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ item.cost | currency:"$"}}</td>
+                            <td>
+                                <button class="btn btn-default" ng-click="deleteItem(item)">Delete</button>
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total:</td>
+                                <td ng-model="cart.total" ng-change="updateCart()">{{ cart.total | currency:"$"}}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 col-xs-12" id="date-time">
+                <h2>Select a Pick Up Time</h2>
+                <div class="input-group" id="date-picker">
+                    <input type="date" class="form-control" datepicker-popup ng-model="selectedDate" is-open="calendarOpened" datepicker-options="dateOptions" min-date="minDate" ng-required="true" close-text="Close" ng-change="changeTime()" ng-init="setTime()" />
+                    <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="calendarOpen()"><i class="fa fa-calendar fa-lg"></i></button></span>
+                </div>
+                <div id="time-picker">
+                    <timepicker ng-model="selectedTime" ng-change="changeTime()" hour-step="hstep" minute-step="mstep" show-meridian="isMeridian"></timepicker>
+                </div>
+                <div id="date-time-summary">
+                    <pre class="alert alert-info" ng-model="selectedDateTime" ng-change="changeTime()">Pickup time: {{ selectedDateTime | date:'MMMM dd yyyy hh:mm a' }}</pre>
+                </div>
+                <a class="btn-group" id="checkout">
+                    <button class="btn btn-lg" ng-click="createOrder()" ng-disabled="isDisabled == true">Checkout
+                        <i class="fa fa-cart-arrow-down fa-lg"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

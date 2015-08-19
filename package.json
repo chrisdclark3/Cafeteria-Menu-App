@@ -1,0 +1,10 @@
+{
+  "engines": {
+    "node": "0.12.2"
+  },
+  "name": "Cafeteria-App",
+  "description": "Cafeteria App",
+  "dependencies": {
+    "express": "~4.10.0"
+  }
+}

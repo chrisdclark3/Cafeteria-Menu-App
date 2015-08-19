@@ -1,0 +1,101 @@
+@import "bootstrap";
+@import "font-awesome";
+@import "fonts";
+@import "cart";
+@import "admin";
+@import "menus";
+* {
+    font-family: 'Roboto';
+}
+
+html, body, #view {
+    height: 100%;
+}
+
+@mixin vendorize($property, $value) {
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -o-#{$property}: $value;
+    #{$property}: $value;
+}
+
+@mixin breakpoint ($point) {
+    @if $point==xs {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+    @else if $point==sm {
+        @media (min-width: 768px) {
+            @content;
+        }
+    }
+    @else if $point==md {
+        @media (min-width: 992px) {
+            @content;
+        }
+    }
+    @else if $point==lg {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    }
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+.animated {
+    @include vendorize('animation-duration',1.5s);
+    @include vendorize('animation-fill-mode', both);
+    @include vendorize('animation-iteration-count', infinite);
+}
+
+@include keyframes(bounce) {
+    0%, 20%, 50%, 80%, 100% {
+        @include vendorize('transform', translateY(0));
+    }
+    40% {
+        @include vendorize('transform', translateY(-30px));
+    }
+    60% {
+        @include vendorize('transform', translateY(-15px));
+    }
+}
+
+.bounce {
+    animation-name: bounce;
+}
+
+#navbar {
+    border-radius: none;
+    .navbar-brand {
+        margin: 0;
+        padding: 0;
+        img {
+            margin: 0;
+            padding: 0;
+            max-height: 50px;
+        }
+    }
+    .badge {
+        background-color: $berkley-gold;
+        color: $berkley-blue;
+    }
+    p {
+        padding-right: 15px;
+    }
+}

@@ -1,0 +1,32 @@
+<div class="navbar navbar-default" role="navigation" id="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://www.berkeley.edu/">
+                <img ng-src="https://s3.amazonaws.com/cafeteria-menu-app/berkley.png">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" ng-class="!isCollapsed && 'in'">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#/menus">Menus</a>
+                </li>
+                <li ng-controller="CartsCtrl">
+                    <a href="#/cart" ng-model="cart.count" ng-change="updateCart()"> Shopping Cart <span class="badge">{{ cart.count }}</span></a>
+                </li>
+                <li ng-controller="AdminCtrl">
+                    <a href="#/admin"> Admin</a>
+                </li>
+            </ul>
+            <div class="navbar-header pull-right">
+                <p class="navbar-text navbar-nav">Welcome <b>Arun</b></p>
+            </div>
+        </div>
+        <!-- /.nav-collapse -->
+    </div>
+</div>

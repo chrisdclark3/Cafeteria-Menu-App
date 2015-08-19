@@ -1,0 +1,39 @@
+<div ng-include src="'views/navbar.html'"></div>
+<div ng-controller="AdminCtrl" id="admin">
+    <div class="container">
+        <h2 id="orders-header">Orders</h2>
+        <div class="row" id="orders-title">
+            <div class="col-xs-1 col-sm-1 col-md-1"><h4>Order</h4></div>
+            <div class="col-xs-2 col-sm-2 col-md-3"><h4>Student</h4></div>
+            <div class="col-xs-2 col-sm-2 col-md-2"><h4>Total</h4></div>
+            <div class="col-xs-5 col-sm-5 col-md-3"><h4>Time</h4></div>
+            <div class="col-xs-2 col-sm-2 col-md-3"><h4>Status</h4></div>
+        </div>
+        <accordion close-others="oneAtATime">
+            <accordion-group ng-repeat="order in orders track by $index" ng-if="order.id != null" is-open="$parent.openAccordion">
+                <accordion-heading>
+                    <div class="item-header row" ng-class="{'alert alert-danger': order.status == 'Failure', 'alert alert-success': order.status == 'Success'}">
+                        <div class="col-xs-1 col-sm-1 col-md-1"><p>{{ order.id }}</p></div>
+                        <div class="col-xs-2 col-sm-2 col-md-3"><p>{{ order.user }}</p></div>
+                        <div class="col-xs-2 col-sm-2 col-md-2"><p>{{ order.cart.total | currency:"$" }}</p></div>
+                        <div class="col-xs-5 col-sm-5 col-md-3"><p>{{ order.createdAt }}</p></div>
+                        <div class="col-xs-2 col-sm-2 col-md-3">
+                            <p>
+                                <select class="form-control" ng-model="order.status" ng-change="setStatus($index, order.status)" ng-click="setStatus($index, order.status)">
+                                    <option>Status</option>
+                                    <option>Failure</option>
+                                    <option>Success</option>
+                                </select>
+                                <i class="fa fa-times-circle fa-lg delete-order-icon" ng-click="deleteOrder($index)"></i>
+                            </p>
+                        </div>
+                    </div>
+                </accordion-heading>
+                <div class="well item-summary" ng-repeat="item in order.cart.items">
+                    <p><b>{{item.qty}} {{item.name}} </b>{{item.cost | currency:"$"}}</p>
+                    <p>{{item.description}}</p>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

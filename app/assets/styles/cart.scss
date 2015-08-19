@@ -1,0 +1,67 @@
+@import "bootstrap";
+@import "font-awesome";
+
+@mixin vendorize($property, $value) {
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -o-#{$property}: $value;
+    #{$property}: $value;
+}
+
+#cart {
+    h2 {
+        margin-bottom: 1em;
+    }
+    .fa-chevron-up, .fa-chevron-down {
+    	color: $berkley-blue;
+    }
+    table {
+        width: 100%;
+        td {
+            margin-left: auto;
+            margin-right: auto;
+            vertical-align: middle;
+            width: auto;
+        }
+        .update-item {
+            text-overflow: elipses;
+            input {
+                min-width: 50px;
+            }
+        }
+        tfoot {
+            td {
+                border: none;
+            }
+        }
+    }
+    #date-time {
+        float: left;
+        text-align: left;
+        #time-picker {
+            display: inline-block;
+            * {
+                margin-left: auto;
+                margin-right: auto;
+                width: auto;
+            }
+        }
+    }
+    #checkout {
+        background-color: $berkley-green;
+        color: white;
+        padding: 5px;
+        border-radius: 5%;
+        &:hover {
+            color: $berkley-gold;
+            cursor: pointer;
+        }
+        button {
+            background-color: transparent;
+            &:hover {
+                color: $berkley-gold;
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<div ng-include src="'views/navbar.html'"></div>
+<div ng-controller="MenusCtrl" id="res-menus" ng-click="closeMenu()">
+    <div id="menus-wrapper">
+        <h2 id="menus-title">Cafeteria Restaurants</h2>
+        <ul>
+            <li ng-repeat="menu in restaurants track by $index" id="{{ menu.alias }}" ng-click="toggleMenu($index)" ng-class="{ 'active-res-menu': $index == selectedMenu, 'inactive-res-menu': selectedMenu != -1 && $index != selectedMenu }">
+                <i class="fa fa-times-circle-o fa-3x" ng-if="$index == selectedMenu" ng-click="closeMenu()"></i>
+                <div class="res-wrapper">
+                    <div class="res">
+                        <div class="res-header">
+                            <h2>{{ menu.name }}</h2>
+                            <p>{{ menu.description}}</p>
+                        </div>
+                        <div class="res-content" ng-if="$index == selectedMenu">
+                            <div class="res-item" ng-repeat="item in menu.items">
+                                <i class="fa fa-plus-circle fa-2x" ng-click="createItem(item, menu)"></i>
+                                <div class="res-item-content">
+                                    <h4>{{item.name}} <small>{{item.price | currency:"$"}}</small></h4>
+                                    <p>{{item.description}}</p>
+                                </div>
+                            </div>
+                            <div ng-if="itemCreated" ng-repeat="message in messages">
+                                <pre class="alert alert-success animated bounce">{{ message.content }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <a class="btn-group" id="checkout" href="#/cart">
+            <button class="btn btn-lg">Checkout</button>
+            <i class="fa fa-cart-arrow-down fa-2x"></i>
+        </a>
+    </div>
+</div>
