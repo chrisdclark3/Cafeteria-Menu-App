@@ -75,7 +75,8 @@ app.controller('CartsCtrl', function(Cart, Menu, Order, $scope, localStorageServ
     $scope.changeTime = function() {
         var d = $scope.selectedDate;
         var t = $scope.selectedTime;
-        $scope.selectedDateTime = new Date(d.getFullYear(), d.getMonth(), d.getDay(), t.getHours(), t.getMinutes());
+        console.log("DATE: ", d, "TIME: ", t);
+        $scope.selectedDateTime = new Date(d.getFullYear(), d.getMonth(), d.getDay(), t.getHours(), t.getMinutes(), 0, 0);
     };
 
 });
