@@ -1,12 +1,14 @@
-app.factory('Order', function(localStorageService, $rootScope) {
+app.factory('Order', function(localStorageService, $q, $rootScope) {
 
     factory = {};
+
+    // localStorageService.remove('orders');
 
     factory.initialize = function () {
       if (localStorageService.get('orders') == null) {
         factory.orders = [];
       } else {
-          factory.orders = localStorageService.get('orders');
+        factory.orders = localStorageService.get('orders');
       }
       $rootScope.$broadcast('updateOrders', factory.orders);
     };
@@ -15,19 +17,19 @@ app.factory('Order', function(localStorageService, $rootScope) {
 
 
     factory.formatDate = function (d) {
-        var dateString = d.toDateString() + " at " + d.toLocaleTimeString();
-        return dateString;
+        return d.toDateString() + " at " + d.toLocaleTimeString();
     };
 
     factory.createOrder = function(cart, time, user) {
         var order = {
-            id: factory.orders.length++,
+            id: factory.orders.length,
             cart: cart,
             user: user,
             status: 'Status',
             createdAt: factory.formatDate(time)
         };
         factory.orders.push(order);
+        console.log("FACTORY orders", factory.orders);
         factory.updateOrders();
     };
 
@@ -43,6 +45,7 @@ app.factory('Order', function(localStorageService, $rootScope) {
 
     factory.deleteOrder = function(index) {
         factory.orders.splice(index, 1);
+        console.log("First Factory orders in createOrder", factory.orders);
         factory.updateOrders();
     };
 
