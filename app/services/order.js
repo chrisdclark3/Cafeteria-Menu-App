@@ -2,8 +2,6 @@ app.factory('Order', function(localStorageService, $q, $rootScope) {
 
     factory = {};
 
-    // localStorageService.remove('orders');
-
     factory.initialize = function () {
       if (localStorageService.get('orders') == null) {
         factory.orders = [];
@@ -12,7 +10,6 @@ app.factory('Order', function(localStorageService, $q, $rootScope) {
       }
       $rootScope.$broadcast('updateOrders', factory.orders);
     };
-
     factory.initialize();
 
 
@@ -29,7 +26,6 @@ app.factory('Order', function(localStorageService, $q, $rootScope) {
             createdAt: factory.formatDate(time)
         };
         factory.orders.push(order);
-        console.log("FACTORY orders", factory.orders);
         factory.updateOrders();
     };
 
